@@ -9,7 +9,7 @@ BIB := bibtex
 
 SRC := main
 
-BIN := CNSM-graph-presentation.pdf
+BIN := CNSM-graph-slides.pdf
 
 all: graph
 
