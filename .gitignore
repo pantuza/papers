@@ -1,0 +1,13 @@
+# Latex files 
+*.aux
+*.pdf
+*.dvi
+*.log
+*.bbl
+*.blg
+*.bak
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
