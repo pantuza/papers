@@ -1,0 +1,81 @@
+\section{Introduction}
+\label{sec:introduction}
+
+%Software Defined Networks (SDN) decouple the data plane from control plane.
+%\citep{guedes2012redes}.
+Software environments designed to provide SDN applications
+are named SDN controllers.
+They have also been called network operating systems because they provide a layer
+that
+isolates and control the access to the physical network elements, providing
+a standardized interface to them. That interface may take different forms,
+like events in NOX~\cite{nox}, an internal database in Onix~\cite{teemu2010onix},
+a predicate-rule based reasoning system~\cite{fml2009}, 
+or a query language in Frenetic~\cite{Foster:2011:FNP:2034574.2034812},
+for example.
+
+No matter the API, 
+almost all applications of Software Defined Networks (SDN)
+need a topological view of the network; in
+fact, that global view is one of the key aspects of that
+paradigm~\citep{martin2010virtualizing}.
+Graphs model the network topology in a direct, natural and precise way,
+so describing the network using a graph has become a common practice in many works,
+protocols and network software, including those on
+SDN~\citep{ramya2012dynamic}.
+In this sense, a graph should be a basic resource of an SDN controller,
+providing the
+network representation, the access and the control of the network elements in
+a single structure. Thus, a graph module can be of multiple uses in this kind of
+software.
+
+%A controller is composed of many interconnected modules and can interact with external systems.
+A graph model would be useful for both the internal modules of the
+SDN controller as for the applications using the controller.
+They need topological information or just access to the network data,
+and the search for and access to the network
+entities can be provided by the graph module. 
+It may have the capacity to notify state changes, be it through events,
+callbacks or other notification mechanisms.
+
+Moreover, in practice, many SDN applications use graph algorithms to obtain
+informations that affect the control of the underlying network, such as
+Shortest Path, Minimum Spanning Tree, Graph Coloring, etc.
+The graph module store this kind of representation directly and execute any
+of those algorithms internally,
+making the results available for other software modules,
+with no need for them to repeat the
+computation, and for the application developer to re-implement 
+complex data structures and algorithms.
+A graph module can be implemented for that goal, avoiding new dependencies
+among different modules.
+
+
+The interactions with the graph module can be encapsulated and 
+defined as a semantically stable and standardized interface. Its implementation
+can be modified to adjust to different systems, using different resources like
+local memory, remote databases, centralized or distributed processing,
+concurrency control, 
+parallelism, persistence, performance and other relevant characteristics.
+
+%Considering the importance of this field on network operating systems, including
+%the management software and applications, 
+%this paper aims to exemplify and analyze the utilization of graph modules on SDN development.
+%The controller used in this work is POX. 
+%
+%As other SDN controllers, POX has no network representation built on graph.
+
+
+This paper presents a
+description of a new kind of abstraction for network management,
+integrating elements like automated fault detection and provision for dynamic
+graphs,
+a real implementation on a system using OpenFlow~\citep{nick2008openflow},
+and its experimental validation.
+
+The remainder of this paper provides, first, a description of the POX controller
+and the design, properties and project decisions that lead to the graph model
+implementation.
+After that we show some experiments and results obtained in a network simulation
+environment, in this case, Mininet~\citep{lantz2010network}.
+Finally, we discuss some paths for future work and a brief conclusion. 

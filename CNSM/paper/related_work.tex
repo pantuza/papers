@@ -1,0 +1,31 @@
+\section{Related work}
+\label{sec:related-work}
+
+
+The idea of representing the network as a graph was mentioned by Casado
+\emph{et al.} in one of the first SDN papers~\cite{martin2010virtualizing}. 
+However, there were no details about their implementation. In a later work,
+SDN was used to implement different network topologies in a datacenter
+scenario, but that was not done by implementing a graph abstraction inside
+the controller~\cite{ripcord}.
+
+Raghavendra \emph{et al.} presented a graph module with dynamic update
+capabilities and a public API that could be extended to include different
+graph algorithms~\cite{ramya2012dynamic}.
+Although the work was aimed at SDN/cloud scenarios, there was
+no actual integration with any SDN controller, which was the major
+focus or the present work.
+
+The Onix controller~\citep{teemu2010onix} was designed around the
+concept of a network information base (NIB). That base keeps a global
+view of the network in a form similar to SNMP's MIB. However, the
+representation of the graph is achieved by indexing an element's entry in
+relation to its neighbors, not directly.
+
+DSLs (domain specific languages) are presented by 
+Frenetic \citep{Foster:2011:FNP:2034574.2034812} and 
+Pyretic \citep{Monsanto:2013:CSN:2482626.2482629} as good
+solutions for the network data retrieval problem. Neither of them
+export the network graph as a first order element, but it can be built
+externally based on the information available.
+

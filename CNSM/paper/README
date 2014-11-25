@@ -1,0 +1,17 @@
+#
+# Compiling dependencies of the ManSDN Graph paper
+#
+
+
+
+# ubuntu
+$> sudo apt-get install texlive-science
+$> sudo zypper install texlive-outlines
+$> sudo apt-get install texlive-publishers
+
+
+# opensuse
+
+$> sudo zypper install texlive-algorithm2e
+$> sudo zypper install texlive-outlines
+$> sudo zypper install texlive-collection-publishers

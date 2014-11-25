@@ -1,0 +1,31 @@
+\section{Conclusion}
+\label{sec:conclusion}
+This paper showed the use of graphs in the Software Defined Networking context.
+A real time graph of the network meets one of the mainly advantages
+expected from SDN by
+decoupling the control plane from data plane, which is to 
+achieve a global view of the network.
+It is noted that the system keeps a reliable, consistent and 
+dynamic representation of the real network, facilitating the management
+tasks in a Software Defined Network.
+
+As a future work we plan to build an on-line graph visualizer 
+that interacts with the network administrator and shows, in 
+an easier way, the entire network operation.
+Various popular graph algorithms should be provided by the graph module. 
+Those should be implemented in the future releases of the system.
+
+One element of concern is reliability:
+just like POX by itself, if the controller process is terminated, then the
+entire graph is lost.
+For that, a distributed graph database can be used to store
+the network graph in a persistent, reliable and fault tolerant
+structure.
+
+Finally, the graph abstraction has been identified in other network
+scenarios, like cloud computing. OpenStack, one of the most popular systems
+for cloud management/virtualization orchestration, includes a network
+topology view in one of its modules, Neutron~\cite{openstacksite}. That
+abstraction has already been combined with SDN to implement isolated
+multi-tenant networks~\cite{lcn2013}, it might be interesting to consider
+how they could be further combined to build a unified, shared view.
