@@ -1,0 +1,91 @@
+\section{Introdução}
+\label{sec:introduction}
+
+Redes definidas por software (SDN) separam o plano de dados do plano 
+de controle \citep{guedes2012redes}.
+Softwares destinados para elaboração de aplicações SDN, 
+como o NOX, o POX, o Onix, são chamados de controladores SDN.
+Eles também são considerados sistemas operacionais de rede, pois 
+formam uma camada que separa e fornece interface padronizada aos recursos da rede.
+Protocolos padronizados como OpenFlow viabilizam as SDN.
+
+As características de um software para SDN podem variar de acordo com o domínio da aplicação. 
+Porém, uma característica em comum em quase todas as aplicações em SDN é a necessidade de 
+uma ``visão'' topológica da rede.
+Grafos representam a topologia de uma rede de forma direta, natural e precisa. 
+Por isso, a descrição da rede em forma de grafos é um elemento comum em diversos
+dos principais trabalhos, protocolos e softwares de rede, 
+inclusive os elaborados para SDN,
+como \citep{martin2010virtualizing}, \emph{Network Information Base}, \citep{ramya2012dynamic}.
+
+Nesse sentido, o grafo é um recurso básico de um controlador SDN
+que fornece a representação da rede.
+Por isso, um módulo de grafo parece ser fundamental nesses tipos de software.
+Em analogia, um módulo de grafo em um sistema operacional de rede é 
+similar ao módulo de sistema de arquivos e outros módulos típicos 
+em um sistema operacional clássico.
+Contudo, diferentemente dos sistemas operacionais que já estão 
+razoavelmente solidificados depois de anos de pesquisas e desenvolvimento,
+os sistemas operacionais de rede, especialmente no modelo de SDN, 
+ainda possuem vários temas específicos e carentes de pesquisa.
+A representação da rede, o acesso ou controle de seus elementos
+é um desse temas.
+
+Um controlador é composto de diversos módulos que se interligam, 
+podendo interagir com outros sistemas externos, 
+inclusive legados. 
+Um módulo de grafo é útil tanto para os módulos internos do controlador SDN,
+quanto as aplicações elaboradas sobre o controlador.
+Ambos, podem necessitar de informações da topologia ou 
+simplesmente ter acesso aos dados, receber eventos e/ou
+executar métodos sobre os objetos de entidades da rede, 
+independente de serem entidades lógicas ou físicas.
+Em termos de design e arquitetura do sistema operacional de rede, 
+o acesso e a pesquisa às entidades de rede podem ser fornecidos 
+por meio do módulo de grafo,
+que também deve possuir a capacidade de notificar mudanças de estado, 
+via eventos, \emph{callback} ou outros mecanismos de notificação.
+Como a interação com o módulo de grafos pode ser encapsulada e abstraída 
+em uma interface semanticamente estável e padronizada,
+sua implementação pode variar para se adaptar a diferentes tipos de sistema, 
+contando com diferentes recursos como o 
+uso de memória local ou de banco de dados remoto, 
+processamento centralizado ou distribuído, 
+controle de concorrência, paralelismo, persistência, desempenho e 
+vários outras características relevantes.
+
+Além disto, na prática, vários softwares em SDN,
+principalmente os de gerenciamento, utilizam informações
+obtidas de algoritmos em grafo, como menor caminho,
+árvore geradora mínima, coloração, etc.
+O módulo de grafo pode executar ou registrar esse tipo de computação,
+tornando disponível para qualquer outro software os resultados já processados,
+sem que eles precisem repetir computação já executada e nem 
+implementar algoritmos específicos que podem ser mantido no módulo de grafos.
+Isso pode ser realizado sem criar dependência entre diferentes módulos,
+bastando que sejam adotados os recursos do módulo básico de grafo.
+
+Considerando-se a importância do tema para o desenvolvimento de 
+sistemas operacionais de rede, 
+incluindo os softwares de controle e os aplicativos,
+o objetivo deste trabalho é exemplificar e analisar o uso de um módulo de grafos 
+para o desenvolvimento de SDN.
+O controlador usado na pesquisa é o POX,
+pois, assim como outros softwares controladores SDN,
+ainda não fornece esse tipo de recurso de forma ampla e geral.
+
+Este artigo apresenta as seguintes contribuições. 
+Primeiro, descrevemos um sistema para o gerenciamento de redes. 
+As redes são representadas por grafos. 
+Os grafos são dinâmicos, em tempo real e contêm estatísticas da rede. 
+Este sistema é compatível com o padrão OpenFlow, um dos protocolos para Rede Definidas por Software. 
+Depois, validamos o nosso sistema com experimentos. 
+O sistema proposto permite a identificação dos elementos de rede e também detecção de falhas.
+
+Este trabalho apresenta uma comparação com outros trabalhos correlatos. 
+Em sequência, são descritas características de design relacionadas com o POX 
+e as decisões de projeto relacionados com a implementação do módulo de grafo. 
+Também são apresentados experimentos e resultados 
+obtidos em um ambiente de simulação em redes, 
+no caso, o Mininet \citep{lantz2010network}.
+Por fim, são discutidos os aspectos futuros do trabalho e uma breve conclusão. 

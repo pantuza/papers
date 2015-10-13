@@ -1,0 +1,60 @@
+\section{Trabalhos Relacionados}
+\label{sec:related-work}
+
+Um sistema de autenticação 
+seguro é construído sobre o controlador SDN em \citep{james2013HyperPass}.
+O projeto RouteFlow  \citep{christian2010openflow} 
+descreve um modelo de apresentação topológica da rede 
+através de arquivos de configuração.
+Apesar de serem relacionados, 
+principalmente por tratarem de questões de gerenciamento,
+nenhum desses trabalhos foca a representação da rede em modelo de grafo.
+
+\citep{martin2010virtualizing} apresenta um modelo
+de controlador em que a rede lógica e a topologia real da rede podem 
+ser mapeadas como grafos.
+O projeto Onix da Google \citep{teemu2010onix} 
+apresenta uma abordagem SDN em que o 
+controlador mantém uma visão global da rede em forma de grafo.
+A NIB - \emph{Network Information Base}, um dos elementos fundamentais 
+do projeto Onix \citep{teemu2010onix},
+é um banco de dados distribuído, 
+garantindo consistência e escalabidade à aplicação.
+Ambos se relacionam com o presente trabalho,
+porém não focam o tema de grafos.
+
+Em \citep{ramya2012dynamic}, é apresentado um módulo de 
+grafos com capacidade de atualização dinâmica e uma API pública,
+implementado em C++ usando STL (\emph{Standard Template Library}).
+Ele possibilita a adoção de algoritmos gerais que podem ser executados 
+sobre o grafo, entretanto foca algoritmos de computação de rotas e atribuição de caminho.
+O trabalho é geral, porém sem integração com controladores SDN na prática.
+
+No geral, a representação em grafos proposta no presente trabalho 
+também mantém dados sobre a rede, similar à NIB do Onix.
+Como é possível registrar dados ``extras'' para cada \emph{Entity}, 
+o módulo \emph{graph} vai além de manter informações topológicas.
+Inevitavelmente, a necessidade de se buscar e monitorar dados 
+específicos, principalmente em redes complexas, atrai o design de software 
+de SDN para a direção de alguma forma de linguagem (DSL) que simplifique, 
+organize, generalize e garanta eficiência na manipulação desses dados.
+Esse é o exemplo do Frenetic \citep{Foster:2011:FNP:2034574.2034812} 
+e do Pyretic \citep{Monsanto:2013:CSN:2482626.2482629}.
+
+Enquanto a abordagem da DSL é baseada em atuação, execução,
+conjunta com o controlador,
+o NIB é baseada em um banco de dados distribuído,
+com uma abordagem mais ampla e atacando problemas mais gerais
+como persistência, concorrência, redundância, escalabilidade, etc.
+
+O POX, segundo seu mantenedor, Murphy Mccauley, 
+adotou o modelo de \emph{network fabric} \citep{martin2012fabric}. 
+Esta arquitetura propõe uma divisão lógica em que a rede possui três elementos: 
+\emph{hosts}, \emph{edge switchs} e \emph{core fabric}. 
+O POX foca sua atuação no \emph{core fabric}, que, 
+segundo essa arquitetura, lida apenas com transporte básico de pacotes.
+Por isso, a abordagem do presente trabalho também lida com
+controladores SDN relacionados com o \emph{core fabric}, 
+porém incluindo uma visão dos \emph{hosts} e, se necessário, dos \emph{edge switchs}.
+Uma generalização para a Internet dessa arquitetura pode ser 
+vista em \citep{barath2012software}. 

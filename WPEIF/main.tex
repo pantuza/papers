@@ -1,0 +1,61 @@
+% Two Column Article documento class
+\documentclass[12pt]{article} 
+
+% package includes
+\usepackage{sbc-template}
+\usepackage[utf8]{inputenc} % encoding
+\usepackage[brazil]{babel} % language
+\usepackage{hyperref} % http links
+\usepackage{natbib} % bibliograph
+\usepackage{graphicx} % images
+\usepackage{listingsutf8} % for code
+\usepackage{color}
+\usepackage[vlined,boxed,portuguese]{algorithm2e}
+\usepackage{outlines}
+
+
+\input{settings}
+
+\sloppy
+
+
+% Article title definitions 
+\title{Análise e Gerenciamento de Rede através de Grafos em Redes Definidas por Software}
+
+
+\author{Gustavo Pantuza, 
+        Frederico Sampaio,
+        Luiz F M Vieira, \\
+        Dorgival Guedes,
+        Marcos A M Vieira}
+        
+
+\address{Departamento de Ciência da Computação \\ 
+         Universidade Federal de Minas Gerais
+    \email{\{pantuza,fredmbs,lfvieira,dorgival,mmvieira\}@dcc.ufmg.br}
+}
+
+
+\date{25 de Novembro de 2013}
+
+
+% Start of the document
+\begin{document}
+
+\maketitle
+\input{abstract_en}
+\input{abstract_pt}
+\input{introduction}
+\input{related_work}
+\input{design}
+\input{project}
+\input{experiments}
+% \input{discussions}
+\input{future}
+\input{conclusion}
+
+% Import bibliograph file
+\bibliographystyle{sbc}
+\bibliography{references}
+
+\end{document}

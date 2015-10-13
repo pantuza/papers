@@ -1,0 +1,119 @@
+\section{O design do POX}
+\label{sec:design}
+
+Esta seção descreve as características mínimas e necessárias do POX 
+para atingir o objetivo de elaboração do módulo de grafos.
+
+O POX é um arcabouço para a elaboração de softwares de SDN.
+Ele é baseado em componentes.
+Os componentes arquiteturais do POX são chamados de módulos.
+É possível carregar módulos tanto de forma estática (via {\it import})
+quanto dinâmica, durante a execução (via {\it eval}). 
+Cada módulo, representado por sua classe, 
+se publica ao \emph{core} através de um método obrigatório chamado \emph{launch}.
+
+O \emph{OpenFlow} \citep{nick2008openflow} é um protocolo de comunicação
+que possibilita o acesso do plano de encaminhamento de um \emph{switch} 
+ou roteador.
+Esse acesso é feito através de uma interface padronizada para esses
+dispositivos de rede.
+Essa comunicação permite experimentar novos protocolos facilitando 
+o desenvolvimento de pesquisas em redes.
+O POX, um controlador SDN, implementa um componente para comunicar com 
+dispositivos de rede que estão habilitados a utilizar o protocolo 
+\emph{OpenFlow}. 
+Esse componente chamado \emph{openflow}, é responsável por enviar 
+comandos e receber mensagens dos equipamentos de rede. 
+Para o núcleo do controlador essas mensagens e comandos ocorrem na 
+forma de eventos.
+
+O \emph{core} (núcleo) define o funcionamento do POX. 
+Uma de suas principais funções é proporcionar a comunicação entre os módulos.
+O principal mecanismo de comunicação é o envio de eventos.
+O modelo de eventos torna o design mais flexível e com menor acoplamento.
+O \emph{core} oferece um canal de eventos no modelo ``push'',
+ou seja, ele recebe o evento dos \emph{publishers} e envia para os \emph{subscribers}.
+Via \emph{core}, cada módulo pode publicar novos canais de eventos 
+ou se inscrever em canais de eventos.
+O próprio \emph{core} publica alguns canais de eventos, 
+como os relacionados com a carga de módulos.
+
+O POX contém alguns módulos de descoberta que 
+publicam eventos que se relacionam com a topologia da rede.
+Esses módulos foram criados em contextos diferentes. 
+Um módulo específico, o \emph{topology},
+é responsável por mapear a topologia da rede. 
+Utilizando os recursos do \emph{core}, 
+ele atua como uma espécie de canal de eventos canônico,
+conectando vários \emph{publishers} diferentes com 
+os diversos \emph{subscribers}, 
+sem que um necessite conhecer o outro diretamente. 
+Isso o torna um ponto central genérico
+para os diferentes módulos de descoberta e controle da rede 
+que podem ser adicionados ou removidos, 
+dependendo do caso concreto,
+sem afetar os módulos de gerenciamento e visualização da rede.
+
+Um grafo que represente globalmente a rede 
+deve contar com a integração do \emph{topology} com os
+demais módulos relacionados. 
+Ou seja, o grafo proposto pelo trabalho 
+é uma representação da rede em tempo 
+real e atualizado dinamicamente em função das informações notificadas 
+pelo \emph{topology}. 
+
+O \emph{topology} publica dois tipos de eventos:
+entrada ({\it join}) e saída ({\it leave}) 
+de entidades ({\it entity}).
+A entidade é uma classe abstrata que pode ser
+especializada em switch e host, por exemplo.
+Os diversos módulos notificam os eventos ao \emph{topology},
+via chamada direta de métodos \emph{addEntity} e \emph{removeEntity}. 
+O topology, no papel de  {\it publisher}, notifica seus {\it subscribers}
+por meio do mecanismo de eventos padrão do POX.
+
+Contudo, tanto o \emph{topology} quanto diversos outros módulos relevantes
+necessitaram de novos recursos, como novas classes, 
+ajustes de eventos, informações e estruturas de dados adicionais, etc.
+Por motivo de compatibilidade, durante os ajustes das classes já existentes no POX,
+tentou-se afetar o mínimo possível os programas, principalmente as interfaces.
+Os módulos relevantes para atingir os objetivos do presente trabalho são:
+
+\begin{itemize}
+
+\item{\emph{topology}}: 
+Canal de eventos canônico que generaliza os eventos relacionados a topologia da SDN.
+Ele determina uma chave única para cada entidade de rede no contexto do POX,
+unificando a identificação entre diferentes módulos.
+Modificado para incluir a entidade, e seus respectivos eventos, 
+relacionados com \emph{links},
+além do evento não implementados \emph{HostEvent}.
+
+\item{\emph{host\_tracker}}: 
+Seu objetivo é buscar e rastrear informações sobre os {\it hosts} dentro da rede.
+Minimamente modificado, principalmente para tratar eventos de DHCP.
+
+\item{\emph{openflow.topology}}: 
+Um controle de topologia específico para switches OpenFlow.
+Ele é integrado com o módulo \emph{topology} do POX.
+Também foi modificado para incluir a notificação de eventos relacionados com \emph{links}.
+
+\item{\emph{openflow.discovery}}: 
+Identifica links entre switches OpenFlow por meio do protocolo LLDP.
+
+\item{\emph{misc.dhcpd}}:
+Servidor de DHCP para configuração dinâmica da rede IP.
+
+\end{itemize}
+
+Outras questões relacionadas como, desempenho, estabilidade,
+distribuição, balanceamento de carga, redundância, 
+escalabilidade também vão além tanto do objetivo quanto da
+implementação do POX ou de seus módulos.
+É fundamental destacar que o POX, 
+assim como diversos outros softwares de SDN, 
+tem objetivos relacionados com a pesquisa científica, 
+incluindo exemplos de conceitos e aplicações.
+Seu objetivo e o estágio atual não é de software 
+capaz de atuar em ambiente complexos ou de produção,
+principalmente no qual a estabilidade é um fator crítico.
