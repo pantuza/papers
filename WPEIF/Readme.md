@@ -1,7 +1,6 @@
 ### Title
 
-> #### Análise e Gerenciamento de Rede através de Grafos em Redes Definidas por
-> Software 
+> #### Análise e Gerenciamento de Rede através de Grafos em Redes Definidas por Software 
 
 
 ### abstract
@@ -29,11 +28,10 @@
 
 
 
-### SBRC 2014 - WPEIF (IV Workshop de Pesquisa Experimental 
-da Internet do Futuro)
+### SBRC 2014 - WPEIF 
+(IV Workshop de Pesquisa Experimental da Internet do Futuro)
 
-> This paper was presented at [WPEIF](http://www.sbrc2014.ufsc.br/?pg=workshops&id=6) 
-> workshop in 2014 at Florianópolis - Brazil.
+> This paper was presented at [WPEIF](http://www.sbrc2014.ufsc.br/?pg=workshops&id=6) workshop in 2014 at Florianópolis - Brazil.
 
 ### Compiling the paper
 
